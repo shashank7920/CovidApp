@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { NativeSelect, FormControl } from "@material-ui/core";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 
 import { fetchCountries } from "../../api";
-
-import styles from "./CountryPicker.Module.css";
+import "./some.css";
 
 const Countries = ({ handleCountryChange }) => {
   const [countries, setCountries] = useState([]);
@@ -17,19 +16,25 @@ const Countries = ({ handleCountryChange }) => {
   }, [setCountries]);
 
   return (
-    <FormControl className="styles.formControl">
-      <NativeSelect
-        defaultValue=""
-        onChange={(e) => handleCountryChange(e.target.value)}
+    <div style={{ marginBottom: "40px" }}>
+      <DropdownButton
+        id="dropdown-basic-button"
+        title="Select Country"
+        size="lg"
       >
-        <option value="globsl">Global</option>
-        {countries.map((country, i) => (
-          <option key={i} value={country}>
-            {country}
-          </option>
-        ))}
-      </NativeSelect>
-    </FormControl>
+        <Dropdown.Item style={{ height: "400px", overflowY: "scroll" }}>
+          {countries.map((country, i) => (
+            <Dropdown.Item
+              key={i}
+              value={country}
+              onClick={(e) => handleCountryChange(country)}
+            >
+              {country}
+            </Dropdown.Item>
+          ))}
+        </Dropdown.Item>
+      </DropdownButton>
+    </div>
   );
 };
 

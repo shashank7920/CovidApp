@@ -1,28 +1,33 @@
 import React from "react";
-import styles from "./Cards.module.css";
 import Countup from "react-countup";
-import { Card, CardContent, Typography, Grid } from "@material-ui/core";
-import cx from "classnames";
+import { Typography } from "@material-ui/core";
+import AppBar from "@material-ui/core/AppBar";
 
 const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
   if (!confirmed) {
-    return "Loading..";
+    return "Loading...";
   }
   return (
-    <div className={styles.container}>
-      <Grid container spacing={3} justify="center">
-        <Grid
-          item
-          component={Card}
-          xs={12}
-          md={3}
-          className={cx(styles.card, styles.infected)}
-        >
-          <CardContent>
-            <Typography color="textSecondary" gutterBottom>
-              Infected
-            </Typography>
+    <div
+      style={{
+        position: "static",
+        width: "100%",
+        marginTop: "2%",
+      }}
+    >
+      <AppBar
+        className="apps"
+        style={{
+          width: "75%",
+          position: "static",
+          marginTop: "10px",
+          margin: "auto",
+        }}
+      >
+        <div className="mains" style={{ display: "flex" }}>
+          <div>
             <Typography variant="h5">
+              <Typography variant="h5">Infected</Typography>
               <Countup
                 start={0}
                 end={confirmed.value}
@@ -30,53 +35,11 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
                 separator=","
               />
             </Typography>
-            <Typography color="textSecondary">
-              {new Date(lastUpdate).toDateString()}
-            </Typography>
-            <Typography variant="body2">
-              Number of active cases of COVID-19.
-            </Typography>
-          </CardContent>
-        </Grid>
-        <Grid
-          item
-          component={Card}
-          xs={12}
-          md={3}
-          className={cx(styles.card, styles.recovered)}
-        >
-          <CardContent>
-            <Typography color="textSecondary" gutterBottom>
-              Recovered
-            </Typography>
+          </div>
+          <div>
+            {" "}
             <Typography variant="h5">
-              <Countup
-                start={0}
-                end={recovered.value}
-                duration={2.5}
-                separator=","
-              />
-            </Typography>
-            <Typography color="textSecondary">
-              {new Date(lastUpdate).toDateString()}
-            </Typography>
-            <Typography variant="body2">
-              Number of recovered cases of COVID-19.
-            </Typography>
-          </CardContent>
-        </Grid>
-        <Grid
-          item
-          component={Card}
-          xs={12}
-          md={3}
-          className={cx(styles.card, styles.deaths)}
-        >
-          <CardContent>
-            <Typography color="textSecondary" gutterBottom>
-              Deaths
-            </Typography>
-            <Typography variant="h5">
+              <Typography variant="h5">Deaths</Typography>
               <Countup
                 start={0}
                 end={deaths.value}
@@ -84,15 +47,20 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
                 separator=","
               />
             </Typography>
-            <Typography color="textSecondary">
-              {new Date(lastUpdate).toDateString()}
+          </div>
+          <div>
+            <Typography variant="h5">
+              <Typography variant="h5">Recovered</Typography>
+              <Countup
+                start={0}
+                end={recovered.value}
+                duration={2.5}
+                separator=","
+              />
             </Typography>
-            <Typography variant="body2">
-              Number of Deaths of COVID-19.
-            </Typography>
-          </CardContent>
-        </Grid>
-      </Grid>
+          </div>
+        </div>
+      </AppBar>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import "./App.css";
 import Cards from "./Components/Cards/Cards";
 import Chart from "./Components/Chart/Chart";
 import CountryPicker from "./Components/CountryPicker/CountryPicker";
+import AllCountries from "./Components/AllCountries/All";
 import styles from "./App.module.css";
 import { fetchData } from "./api/index";
 
@@ -28,6 +29,7 @@ class App extends React.Component {
     return (
       <div className={styles.container}>
         <Cards data={data} />
+        <AllCountries />
         <CountryPicker handleCountryChange={this.handleCountryChange} />
         <Chart data={data} country={country} />
       </div>
